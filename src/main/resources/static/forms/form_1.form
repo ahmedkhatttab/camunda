@@ -1,0 +1,74 @@
+{
+  "components": [
+    {
+      "label": "Applicant Name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1px58fy",
+        "columns": null
+      },
+      "id": "Field_0nptjrg",
+      "key": "emp_name",
+      "description": "Your Name",
+      "disabled": false,
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Number Of Days",
+      "type": "number",
+      "layout": {
+        "row": "Row_1857dqc",
+        "columns": null
+      },
+      "id": "Field_13144kv",
+      "key": "vac_len",
+      "description": "Day(s)",
+      "validate": {
+        "required": true,
+        "min": 1
+      }
+    },
+    {
+      "label": "Vacation Type",
+      "type": "select",
+      "layout": {
+        "row": "Row_1xc92oz",
+        "columns": null
+      },
+      "id": "Field_05vql04",
+      "key": "vac_type",
+      "description": "Type",
+      "searchable": false,
+      "defaultValue": "<none>",
+      "valuesKey": "",
+      "validate": {
+        "required": false
+      }
+    },
+    {
+      "action": "submit",
+      "label": "Send",
+      "type": "button",
+      "layout": {
+        "row": "Row_1t0gvqb",
+        "columns": null
+      },
+      "id": "Field_10brnjf",
+      "key": "field_10z42g0",
+      "properties": {
+        "key1": "value"
+      }
+    }
+  ],
+  "type": "default",
+  "id": "Form_1",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.12.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.19.0",
+  "schemaVersion": 9
+}
