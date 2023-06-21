@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="dmn_decision_id" name="Redirect Request" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+  <decision id="Decision_1c2934q" name="Decision 1">
+    <decisionTable id="DecisionTable_1re6pab">
+      <input id="Input_1" label="Calc Result" camunda:inputVariable="vac_len">
+        <inputExpression id="InputExpression_1" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Dmn Decision" name="dmn_decision" typeRef="string" />
+      <rule id="DecisionRule_0wjynio">
+        <inputEntry id="UnaryTests_0s99km4">
+          <text>&gt;= 5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1k9e9ln">
+          <text>"HR"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0m2k2xh">
+        <inputEntry id="UnaryTests_149mlhb" expressionLanguage="feel">
+          <text>[2..4]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0l4l7q5">
+          <text>"DM"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0b7j4wa">
+        <inputEntry id="UnaryTests_0s38yaz">
+          <text>1</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1tumrh4">
+          <text>"DA"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_1c2934q">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

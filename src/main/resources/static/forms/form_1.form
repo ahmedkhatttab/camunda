@@ -29,37 +29,6 @@
         "required": true,
         "min": 1
       }
-    },
-    {
-      "label": "Vacation Type",
-      "type": "select",
-      "layout": {
-        "row": "Row_1xc92oz",
-        "columns": null
-      },
-      "id": "Field_05vql04",
-      "key": "vac_type",
-      "description": "Type",
-      "searchable": false,
-      "defaultValue": "<none>",
-      "valuesKey": "",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "action": "submit",
-      "label": "Send",
-      "type": "button",
-      "layout": {
-        "row": "Row_1t0gvqb",
-        "columns": null
-      },
-      "id": "Field_10brnjf",
-      "key": "field_10z42g0",
-      "properties": {
-        "key1": "value"
-      }
     }
   ],
   "type": "default",
