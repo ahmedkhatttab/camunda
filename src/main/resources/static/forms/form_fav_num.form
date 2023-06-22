@@ -1,0 +1,27 @@
+{
+  "components": [
+    {
+      "label": "Your Fav Number",
+      "type": "number",
+      "layout": {
+        "row": "Row_06lrinf",
+        "columns": null
+      },
+      "id": "Field_01t2lls",
+      "key": "fav_num",
+      "validate": {
+        "required": true,
+        "min": 0
+      }
+    }
+  ],
+  "type": "default",
+  "id": "Form_1kz2cf4",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.12.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.19.0",
+  "schemaVersion": 9
+}

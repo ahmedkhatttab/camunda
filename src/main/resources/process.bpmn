@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0fr9mxs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.12.0">
-  <bpmn:process id="vacation-process-id" name="Vacation Process" isExecutable="true">
+  <bpmn:process id="vacation-process-id" name="Vacation Process" isExecutable="true" camunda:isStartableInTasklist="false">
     <bpmn:startEvent id="StartEvent_1" name="start process">
       <bpmn:outgoing>SequenceFlow_1fp17al</bpmn:outgoing>
     </bpmn:startEvent>
@@ -18,13 +18,13 @@
     </bpmn:userTask>
     <bpmn:userTask id="Activity_100ccea" name="Read All Vars">
       <bpmn:documentation>Read All ExecVar</bpmn:documentation>
-      <bpmn:incoming>Flow_1t3r70w</bpmn:incoming>
-      <bpmn:outgoing>Flow_0bn50ch</bpmn:outgoing>
+      <bpmn:incoming>Flow_0d44qni</bpmn:incoming>
+      <bpmn:outgoing>Flow_0htgpvx</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:serviceTask id="Activity_0d7iffc" name="Log Decision" camunda:delegateExpression="#{decisionBean}">
       <bpmn:documentation>Add Decision To ExecVar</bpmn:documentation>
       <bpmn:incoming>Flow_0t0dm81</bpmn:incoming>
-      <bpmn:outgoing>Flow_1t3r70w</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0ybilny</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_1g3sbp3" sourceRef="vac_req_task_id" targetRef="Activity_0tgtyzx" />
     <bpmn:businessRuleTask id="Activity_0tgtyzx" name="DMN Rule Engine" camunda:resultVariable="dmn_decision" camunda:decisionRef="Decision_1c2934q" camunda:mapDecisionResult="singleEntry">
@@ -54,10 +54,8 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${dmn_decision == 'DA'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:endEvent id="Event_0gb114n">
-      <bpmn:incoming>Flow_0bn50ch</bpmn:incoming>
+      <bpmn:incoming>Flow_0htgpvx</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_0bn50ch" sourceRef="Activity_100ccea" targetRef="Event_0gb114n" />
-    <bpmn:sequenceFlow id="Flow_1t3r70w" sourceRef="Activity_0d7iffc" targetRef="Activity_100ccea" />
     <bpmn:exclusiveGateway id="Gateway_13qulft">
       <bpmn:incoming>Flow_0h76by3</bpmn:incoming>
       <bpmn:incoming>Flow_0hr82kr</bpmn:incoming>
@@ -72,23 +70,30 @@
       <bpmn:incoming>Flow_02rntje</bpmn:incoming>
       <bpmn:outgoing>Flow_0b9wmkk</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0ybilny" sourceRef="Activity_0d7iffc" targetRef="call_activity_16s3ti3" />
+    <bpmn:sequenceFlow id="Flow_0d44qni" sourceRef="call_activity_16s3ti3" targetRef="Activity_100ccea" />
+    <bpmn:callActivity id="call_activity_16s3ti3" name="Call Diff BPMN" calledElement="sub-process-id">
+      <bpmn:incoming>Flow_0ybilny</bpmn:incoming>
+      <bpmn:outgoing>Flow_0d44qni</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:sequenceFlow id="Flow_0htgpvx" sourceRef="Activity_100ccea" targetRef="Event_0gb114n" />
     <bpmn:textAnnotation id="TextAnnotation_1lhqn9e">
       <bpmn:text>we have to set the "Result Variable " property</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_1005luy" sourceRef="Activity_0tgtyzx" targetRef="TextAnnotation_1lhqn9e" />
     <bpmn:textAnnotation id="TextAnnotation_00sydop">
-      <bpmn:text>To set "Decision Reference" Property wen need to click on the rectangle shap on DMN and set I"D"</bpmn:text>
+      <bpmn:text>To set "Decision Reference" Property wen need to click on the rectangle shap on DMN and set "ID"</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_0mv26m9" sourceRef="Activity_0tgtyzx" targetRef="TextAnnotation_00sydop" />
+    <bpmn:textAnnotation id="TextAnnotation_0htei9u">
+      <bpmn:text>It is used to call another BPMN, NOTE: ExecVars are not visible to both sides</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1hgpdyx" sourceRef="call_activity_16s3ti3" targetRef="TextAnnotation_0htei9u" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="vacation-process-id">
-      <bpmndi:BPMNShape id="TextAnnotation_00sydop_di" bpmnElement="TextAnnotation_00sydop">
-        <dc:Bounds x="350" y="135" width="345" height="50" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_1lhqn9e_di" bpmnElement="TextAnnotation_1lhqn9e">
-        <dc:Bounds x="370" y="440" width="280" height="26" />
+      <bpmndi:BPMNShape id="TextAnnotation_0htei9u_di" bpmnElement="TextAnnotation_0htei9u">
+        <dc:Bounds x="870" y="700" width="285" height="40" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
@@ -101,16 +106,20 @@
         <dc:Bounds x="310" y="277" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ikevbx_di" bpmnElement="vac_rev_task_id">
+        <dc:Bounds x="880" y="120" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0algoq4_di" bpmnElement="Activity_0d7iffc">
+        <dc:Bounds x="1230" y="277" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_13xkr5o_di" bpmnElement="Activity_0tgtyzx">
         <dc:Bounds x="510" y="277" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_1l9qncz_di" bpmnElement="Gateway_1l9qncz" isMarkerVisible="true">
         <dc:Bounds x="715" y="292" width="50" height="50" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0ikevbx_di" bpmnElement="vac_rev_task_id">
-        <dc:Bounds x="880" y="120" width="100" height="80" />
-        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0n7rnd0_di" bpmnElement="Activity_0osq3d6">
         <dc:Bounds x="880" y="277" width="100" height="80" />
@@ -119,32 +128,36 @@
       <bpmndi:BPMNShape id="Gateway_13qulft_di" bpmnElement="Gateway_13qulft" isMarkerVisible="true">
         <dc:Bounds x="1075" y="292" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0algoq4_di" bpmnElement="Activity_0d7iffc">
-        <dc:Bounds x="1230" y="277" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_0x6ir2l_di" bpmnElement="EndEvent_0x6ir2l">
-        <dc:Bounds x="2102" y="299" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2090" y="342" width="61" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1kb6nko_di" bpmnElement="Activity_100ccea">
-        <dc:Bounds x="1420" y="277" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0gb114n_di" bpmnElement="Event_0gb114n">
-        <dc:Bounds x="1602" y="299" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0i1q7t1_di" bpmnElement="Activity_0nd0aw3">
         <dc:Bounds x="880" y="430" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_0mv26m9_di" bpmnElement="Association_0mv26m9">
-        <di:waypoint x="522" y="277" />
-        <di:waypoint x="434" y="185" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1005luy_di" bpmnElement="Association_1005luy">
-        <di:waypoint x="520" y="357" />
-        <di:waypoint x="435" y="440" />
+      <bpmndi:BPMNShape id="TextAnnotation_1lhqn9e_di" bpmnElement="TextAnnotation_1lhqn9e">
+        <dc:Bounds x="370" y="440" width="280" height="26" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_00sydop_di" bpmnElement="TextAnnotation_00sydop">
+        <dc:Bounds x="350" y="135" width="345" height="50" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0x6ir2l_di" bpmnElement="EndEvent_0x6ir2l">
+        <dc:Bounds x="2362" y="299" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2350" y="342" width="61" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0j64afh_di" bpmnElement="call_activity_16s3ti3">
+        <dc:Bounds x="1230" y="610" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1kb6nko_di" bpmnElement="Activity_100ccea">
+        <dc:Bounds x="1230" y="860" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0gb114n_di" bpmnElement="Event_0gb114n">
+        <dc:Bounds x="912" y="882" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_1hgpdyx_di" bpmnElement="Association_1hgpdyx">
+        <di:waypoint x="1230" y="665" />
+        <di:waypoint x="1111" y="700" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1fp17al_di" bpmnElement="SequenceFlow_1fp17al">
         <di:waypoint x="215" y="317" />
@@ -181,14 +194,6 @@
           <dc:Bounds x="762" y="453" width="76" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0bn50ch_di" bpmnElement="Flow_0bn50ch">
-        <di:waypoint x="1520" y="317" />
-        <di:waypoint x="1602" y="317" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1t3r70w_di" bpmnElement="Flow_1t3r70w">
-        <di:waypoint x="1330" y="317" />
-        <di:waypoint x="1420" y="317" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0h76by3_di" bpmnElement="Flow_0h76by3">
         <di:waypoint x="980" y="160" />
         <di:waypoint x="1100" y="160" />
@@ -206,6 +211,26 @@
       <bpmndi:BPMNEdge id="Flow_0t0dm81_di" bpmnElement="Flow_0t0dm81">
         <di:waypoint x="1125" y="317" />
         <di:waypoint x="1230" y="317" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1005luy_di" bpmnElement="Association_1005luy">
+        <di:waypoint x="520" y="357" />
+        <di:waypoint x="435" y="440" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0mv26m9_di" bpmnElement="Association_0mv26m9">
+        <di:waypoint x="522" y="277" />
+        <di:waypoint x="434" y="185" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ybilny_di" bpmnElement="Flow_0ybilny">
+        <di:waypoint x="1280" y="357" />
+        <di:waypoint x="1280" y="610" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0d44qni_di" bpmnElement="Flow_0d44qni">
+        <di:waypoint x="1280" y="690" />
+        <di:waypoint x="1280" y="860" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0htgpvx_di" bpmnElement="Flow_0htgpvx">
+        <di:waypoint x="1230" y="900" />
+        <di:waypoint x="948" y="900" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

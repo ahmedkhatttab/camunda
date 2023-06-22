@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1n23d4b" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+  <bpmn:process id="msg_start_event_process_0yj93wp" name="Message Strart Process" isExecutable="true">
+    <bpmn:startEvent id="msg_start_event_id" name="Wait for Msg">
+      <bpmn:outgoing>Flow_1685zm7</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_06ic97f" messageRef="Message_39fs4ng" />
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1685zm7" sourceRef="msg_start_event_id" targetRef="Activity_1mp3t62" />
+    <bpmn:userTask id="Activity_1mp3t62" name="Enter Fav Number" camunda:formKey="camunda-forms:/forms/form_fav_num.form">
+      <bpmn:incoming>Flow_1685zm7</bpmn:incoming>
+      <bpmn:outgoing>Flow_0dpprtd</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_0qrmjky">
+      <bpmn:incoming>Flow_0dpprtd</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0dpprtd" sourceRef="Activity_1mp3t62" targetRef="Event_0qrmjky" />
+    <bpmn:textAnnotation id="TextAnnotation_0o4lktl">
+      <bpmn:text>We use "Name" under "Message" section to start flow</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_13vl3gt" sourceRef="msg_start_event_id" targetRef="TextAnnotation_0o4lktl" />
+  </bpmn:process>
+  <bpmn:message id="Message_39fs4ng" name="Message_Name_39fs4ng" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="msg_start_event_process_0yj93wp">
+      <bpmndi:BPMNShape id="Event_1f1j3so_di" bpmnElement="msg_start_event_id">
+        <dc:Bounds x="172" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="160" y="205" width="61" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1d7owzu_di" bpmnElement="Activity_1mp3t62">
+        <dc:Bounds x="360" y="140" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0qrmjky_di" bpmnElement="Event_0qrmjky">
+        <dc:Bounds x="612" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0o4lktl_di" bpmnElement="TextAnnotation_0o4lktl">
+        <dc:Bounds x="210" y="80" width="320" height="30" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1685zm7_di" bpmnElement="Flow_1685zm7">
+        <di:waypoint x="208" y="180" />
+        <di:waypoint x="360" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dpprtd_di" bpmnElement="Flow_0dpprtd">
+        <di:waypoint x="460" y="180" />
+        <di:waypoint x="612" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_13vl3gt_di" bpmnElement="Association_13vl3gt">
+        <di:waypoint x="201" y="166" />
+        <di:waypoint x="248" y="110" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
