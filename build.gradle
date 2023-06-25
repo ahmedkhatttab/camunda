@@ -27,6 +27,7 @@ dependencies {
     implementation 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-webapp'
     implementation 'org.camunda.bpm:camunda-engine-plugin-spin'
     implementation 'org.camunda.spin:camunda-spin-dataformat-all'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
     // https://mvnrepository.com/artifact/org.postgresql/postgresql
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
@@ -35,5 +36,12 @@ dependencies {
 
 //    implementation 'com.h2database:h2'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+    // https://mvnrepository.com/artifact/org.camunda.connect/camunda-connect-connectors-all
+    implementation group: 'org.camunda.connect', name: 'camunda-connect-core'
+    implementation group: 'org.camunda.connect', name: 'camunda-connect-http-client'
+    implementation group: 'org.camunda.bpm', name: 'camunda-engine-plugin-connect'
+
+
 }
 

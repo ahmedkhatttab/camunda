@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0kqu1rl" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.12.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+  <bpmn:process id="Process_1dwx1lb" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0j59yb7</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0j59yb7" sourceRef="StartEvent_1" targetRef="Activity_1tzkfuf" />
+    <bpmn:sendTask id="Activity_1tzkfuf" name="Send Email">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://localhost:8080/api/users/email?to=eng.ahmedkhatab@yahoo.com&amp;subject=test_email&amp;body=this_is_a_test_email</camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0j59yb7</bpmn:incoming>
+      <bpmn:outgoing>Flow_0enhuoc</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="Event_1ghqqe7">
+      <bpmn:incoming>Flow_0enhuoc</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0enhuoc" sourceRef="Activity_1tzkfuf" targetRef="Event_1ghqqe7" />
+    <bpmn:textAnnotation id="TextAnnotation_0h1fuph">
+      <bpmn:text>1- turn off 2 factor authentication</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_075tobe">
+      <bpmn:text>2- less secure option should be true</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_082be5q">
+      <bpmn:text>In case of using IMAP</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_1nkimn9">
+      <bpmn:text>In case of using smtp</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0u9i65w" sourceRef="Activity_1tzkfuf" targetRef="TextAnnotation_1nkimn9" />
+    <bpmn:textAnnotation id="TextAnnotation_0gz40sb">
+      <bpmn:text>1- turn on 2 factor authentication</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:textAnnotation id="TextAnnotation_1d0ntc4">
+      <bpmn:text>2- Generate App Password and use it instead of email password</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0psvx1h" sourceRef="Activity_1tzkfuf" targetRef="TextAnnotation_082be5q" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1dwx1lb">
+      <bpmndi:BPMNShape id="TextAnnotation_0h1fuph_di" bpmnElement="TextAnnotation_0h1fuph">
+        <dc:Bounds x="410" y="160" width="340" height="30" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_075tobe_di" bpmnElement="TextAnnotation_075tobe">
+        <dc:Bounds x="410" y="200" width="290" height="30" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_082be5q_di" bpmnElement="TextAnnotation_082be5q">
+        <dc:Bounds x="410" y="120" width="260" height="30" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1nkimn9_di" bpmnElement="TextAnnotation_1nkimn9">
+        <dc:Bounds x="410" y="390" width="200" height="30" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0e8egc7" bpmnElement="TextAnnotation_0gz40sb">
+        <dc:Bounds x="410" y="430" width="340" height="30" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1k1ojxg" bpmnElement="TextAnnotation_1d0ntc4">
+        <dc:Bounds x="410" y="470" width="400" height="30" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="279" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_144s3wh_di" bpmnElement="Activity_1tzkfuf">
+        <dc:Bounds x="270" y="257" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ghqqe7_di" bpmnElement="Event_1ghqqe7">
+        <dc:Bounds x="432" y="279" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0psvx1h_di" bpmnElement="Association_0psvx1h">
+        <di:waypoint x="362" y="258" />
+        <di:waypoint x="474" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0u9i65w_di" bpmnElement="Association_0u9i65w">
+        <di:waypoint x="367" y="333" />
+        <di:waypoint x="441" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0j59yb7_di" bpmnElement="Flow_0j59yb7">
+        <di:waypoint x="215" y="297" />
+        <di:waypoint x="270" y="297" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0enhuoc_di" bpmnElement="Flow_0enhuoc">
+        <di:waypoint x="370" y="297" />
+        <di:waypoint x="432" y="297" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
