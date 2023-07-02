@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1dskve4" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.12.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+  <bpmn:process id="Inclusive_Gateway" name="Inclusive Gateway" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0dsjvi5</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0dsjvi5" sourceRef="StartEvent_1" targetRef="Activity_0oy7u68" />
+    <bpmn:userTask id="Activity_0oy7u68" name="Take A Decision">
+      <bpmn:extensionElements>
+        <camunda:formData />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0dsjvi5</bpmn:incoming>
+      <bpmn:outgoing>Flow_006ixp0</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:inclusiveGateway id="Gateway_0quviig">
+      <bpmn:incoming>Flow_0ddrhzo</bpmn:incoming>
+      <bpmn:outgoing>Flow_0tigea4</bpmn:outgoing>
+      <bpmn:outgoing>Flow_03ah5vz</bpmn:outgoing>
+    </bpmn:inclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0tigea4" sourceRef="Gateway_0quviig" targetRef="Activity_07viznq">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="js">isFirst == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_03ah5vz" sourceRef="Gateway_0quviig" targetRef="Activity_1y6sr2m">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="js">isSecond == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0v4060x" sourceRef="Activity_07viznq" targetRef="Gateway_0k8j1sj" />
+    <bpmn:sequenceFlow id="Flow_18scrfj" sourceRef="Activity_1y6sr2m" targetRef="Gateway_0k8j1sj" />
+    <bpmn:sequenceFlow id="Flow_07nfcaa" sourceRef="Gateway_0k8j1sj" targetRef="Activity_0an4346" />
+    <bpmn:endEvent id="Event_0z0k2fz">
+      <bpmn:incoming>Flow_0bz4ncm</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0bz4ncm" sourceRef="Activity_0an4346" targetRef="Event_0z0k2fz" />
+    <bpmn:userTask id="Activity_07viznq" name="First Task">
+      <bpmn:incoming>Flow_0tigea4</bpmn:incoming>
+      <bpmn:outgoing>Flow_0v4060x</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1y6sr2m" name="Second Task">
+      <bpmn:incoming>Flow_03ah5vz</bpmn:incoming>
+      <bpmn:outgoing>Flow_18scrfj</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_0an4346" name="Read Vars">
+      <bpmn:incoming>Flow_07nfcaa</bpmn:incoming>
+      <bpmn:outgoing>Flow_0bz4ncm</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:inclusiveGateway id="Gateway_0k8j1sj">
+      <bpmn:incoming>Flow_18scrfj</bpmn:incoming>
+      <bpmn:incoming>Flow_0v4060x</bpmn:incoming>
+      <bpmn:outgoing>Flow_07nfcaa</bpmn:outgoing>
+    </bpmn:inclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_006ixp0" sourceRef="Activity_0oy7u68" targetRef="call-sub-process" />
+    <bpmn:callActivity id="call-sub-process" name="Call Activity Subprocess" calledElement="sub-process-2">
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_006ixp0</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ddrhzo</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:sequenceFlow id="Flow_0ddrhzo" sourceRef="call-sub-process" targetRef="Gateway_0quviig" />
+    <bpmn:textAnnotation id="TextAnnotation_0qk32fg">
+      <bpmn:text>NOTE: we need to select  only "Propagate all variables" in IN/Out mapping Propagation, if we select the second option also "Local" we will not be able to pass data between BPMN files.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0e4gkdt" sourceRef="call-sub-process" targetRef="TextAnnotation_0qk32fg" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Inclusive_Gateway">
+      <bpmndi:BPMNShape id="TextAnnotation_0qk32fg_di" bpmnElement="TextAnnotation_0qk32fg">
+        <dc:Bounds x="380" y="420" width="330" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="112" y="209" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0cb4dr9_di" bpmnElement="Activity_0oy7u68">
+        <dc:Bounds x="230" y="187" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_136k6xm_di" bpmnElement="Gateway_0quviig">
+        <dc:Bounds x="605" y="202" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0z0k2fz_di" bpmnElement="Event_0z0k2fz">
+        <dc:Bounds x="1132" y="209" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0zlj6tc_di" bpmnElement="Activity_07viznq">
+        <dc:Bounds x="710" y="60" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1lx2yf1_di" bpmnElement="Activity_1y6sr2m">
+        <dc:Bounds x="710" y="300" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0nioywr_di" bpmnElement="Activity_0an4346">
+        <dc:Bounds x="970" y="187" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0f2d84v_di" bpmnElement="Gateway_0k8j1sj">
+        <dc:Bounds x="865" y="202" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1x5hjb9_di" bpmnElement="call-sub-process">
+        <dc:Bounds x="390" y="187" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0e4gkdt_di" bpmnElement="Association_0e4gkdt">
+        <di:waypoint x="438" y="267" />
+        <di:waypoint x="431" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dsjvi5_di" bpmnElement="Flow_0dsjvi5">
+        <di:waypoint x="148" y="227" />
+        <di:waypoint x="230" y="227" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0tigea4_di" bpmnElement="Flow_0tigea4">
+        <di:waypoint x="630" y="202" />
+        <di:waypoint x="630" y="100" />
+        <di:waypoint x="710" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03ah5vz_di" bpmnElement="Flow_03ah5vz">
+        <di:waypoint x="630" y="252" />
+        <di:waypoint x="630" y="340" />
+        <di:waypoint x="710" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0v4060x_di" bpmnElement="Flow_0v4060x">
+        <di:waypoint x="810" y="100" />
+        <di:waypoint x="890" y="100" />
+        <di:waypoint x="890" y="202" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18scrfj_di" bpmnElement="Flow_18scrfj">
+        <di:waypoint x="810" y="340" />
+        <di:waypoint x="890" y="340" />
+        <di:waypoint x="890" y="252" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_07nfcaa_di" bpmnElement="Flow_07nfcaa">
+        <di:waypoint x="915" y="227" />
+        <di:waypoint x="970" y="227" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0bz4ncm_di" bpmnElement="Flow_0bz4ncm">
+        <di:waypoint x="1070" y="227" />
+        <di:waypoint x="1132" y="227" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_006ixp0_di" bpmnElement="Flow_006ixp0">
+        <di:waypoint x="330" y="227" />
+        <di:waypoint x="390" y="227" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ddrhzo_di" bpmnElement="Flow_0ddrhzo">
+        <di:waypoint x="490" y="227" />
+        <di:waypoint x="605" y="227" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
