@@ -1,0 +1,28 @@
+{
+  "components": [
+    {
+      "label": "User ID",
+      "type": "number",
+      "layout": {
+        "row": "Row_1pm8qpd",
+        "columns": null
+      },
+      "id": "Field_15dap75",
+      "key": "id",
+      "validate": {
+        "required": true,
+        "min": 1,
+        "max": 100
+      }
+    }
+  ],
+  "type": "default",
+  "id": "Form_00voztr",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.12.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.19.0",
+  "schemaVersion": 9
+}

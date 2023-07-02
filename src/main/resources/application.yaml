@@ -1,5 +1,3 @@
-spring.datasource.url: jdbc:h2:file:./camunda-h2-database
-
 camunda.bpm.admin-user:
   id: demo
   password: demo
@@ -10,3 +8,14 @@ spring:
     username: postgres
     password: password
     url: jdbc:postgresql://localhost:5432/camunda-postgres-database
+
+#  mail:
+#    default-encoding: UTF-8
+#    host: smtp.gmail.com
+#    port: 587
+#    username: eng.ahmedkhatab84@gmail.com
+#    password: slftcdfibppbyikk
+#    properties:
+#      mail.smtp.auth: true
+#      mail.smtp.starttls.enable: true
+#      mail.smtp.starttls.required: true

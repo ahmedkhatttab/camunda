@@ -1,0 +1,85 @@
+{
+  "components": [
+    {
+      "label": "ID",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1r53pvr",
+        "columns": null
+      },
+      "id": "Field_0hcb899",
+      "key": "id",
+      "readonly": true,
+      "defaultValue": "${user.id}"
+    },
+    {
+      "label": "First Name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1kake1h",
+        "columns": null
+      },
+      "id": "Field_1aqu32i",
+      "key": "firstName",
+      "readonly": true,
+      "defaultValue": "${userVar.firstName}"
+    },
+    {
+      "label": "Last Name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1ctec0p",
+        "columns": null
+      },
+      "id": "Field_0fgunnl",
+      "key": "userVar.lastName",
+      "readonly": true
+    },
+    {
+      "subtype": "date",
+      "dateLabel": "Date Of Birth",
+      "label": "Date time",
+      "type": "datetime",
+      "layout": {
+        "row": "Row_04x6udr",
+        "columns": null
+      },
+      "id": "Field_0nrtv4e",
+      "key": "${user.dob}",
+      "readonly": true
+    },
+    {
+      "label": "Gender",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0ig4sh3",
+        "columns": null
+      },
+      "id": "Field_1s0k4c1",
+      "key": "${userVar.gender}",
+      "readonly": true,
+      "defaultValue": "${userVar.gender}"
+    },
+    {
+      "label": "Salary",
+      "type": "number",
+      "layout": {
+        "row": "Row_0edhcv4",
+        "columns": null
+      },
+      "id": "Field_0edpti5",
+      "key": "${user.salary}",
+      "decimalDigits": 2,
+      "readonly": true
+    }
+  ],
+  "type": "default",
+  "id": "Form_1r9qm4f",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.12.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.19.0",
+  "schemaVersion": 9
+}
